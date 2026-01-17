@@ -2,6 +2,7 @@ import { Ubuntu } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Component/Shared/Navbar";
 import Footer from "@/Component/Shared/Footer";
+import { Toaster } from "react-hot-toast";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <Toaster/>
         </body>
     </html>
   );

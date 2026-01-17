@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Logo from "./Logo";
 import { CiSearch } from "react-icons/ci";
@@ -8,13 +8,65 @@ import {
   HiOutlineUser,
   HiOutlineMenu,
   HiX,
+  HiLogout,
 } from "react-icons/hi";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  // Check auth status on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const auth = document.cookie
+        .split(";")
+        .find((c) => c.trim().startsWith("auth="))
+        ?.split("=")[1];
+      setIsAuthenticated(auth === "true");
+    };
+
+    checkAuth();
+
+    // Check auth status periodically
+    const interval = setInterval(checkAuth, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Update cart count from localStorage
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      setCartCount(totalItems);
+    };
+
+    // Initial load
+    updateCartCount();
+
+    // Listen for storage changes
+    window.addEventListener("storage", updateCartCount);
+
+    // Poll for changes (for same-tab updates)
+    const interval = setInterval(updateCartCount, 500);
+
+    return () => {
+      window.removeEventListener("storage", updateCartCount);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    // Remove auth cookie
+    document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    setIsAuthenticated(false);
+    // Redirect to home
+    router.push("/");
+  };
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -24,7 +76,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-secondary/95 backdrop-blur-md py-2 sticky top-0 z-50 shadow-sm">
+    <nav className="bg-secondary/95 py-2 sticky top-0 z-50 shadow-sm">
       <Container>
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -81,20 +133,38 @@ const Navbar = () => {
               transition={{ delay: 0.5, duration: 0.5 }}
               className="flex items-center gap-3"
             >
-              <button className="relative p-2 hover:bg-white rounded-full transition-all group">
+              <Link
+                href="/cart"
+                className="relative p-2 hover:bg-white rounded-full transition-all group"
+              >
                 <HiOutlineShoppingCart
                   size={24}
                   className="text-black group-hover:text-primary transition-colors"
                 />
-                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
-                  0
-                </span>
-              </button>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
 
-              <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition-all font-medium flex items-center gap-2 shadow-md hover:shadow-lg">
-                <HiOutlineUser size={20} />
-                <span>Login</span>
-              </button>
+              {isAuthenticated ? (
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition-all font-medium flex items-center gap-2 shadow-md hover:shadow-lg"
+                >
+                  <HiLogout size={20} />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  className="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition-all font-medium flex items-center gap-2 shadow-md hover:shadow-lg"
+                >
+                  <HiOutlineUser size={20} />
+                  <span>Login</span>
+                </Link>
+              )}
             </motion.div>
           </div>
 
@@ -155,14 +225,30 @@ const Navbar = () => {
 
                 {/* Mobile Actions */}
                 <div className="flex gap-3 pt-2">
-                  <button className="flex-1 bg-white text-primary px-4 py-2 rounded-full font-medium flex items-center justify-center gap-2 border-2 border-primary hover:bg-primary hover:text-white transition-all">
+                  <Link
+                    href="/cart"
+                    className="flex-1 bg-white text-primary px-4 py-2 rounded-full font-medium flex items-center justify-center gap-2 border-2 border-primary hover:bg-primary hover:text-white transition-all"
+                  >
                     <HiOutlineShoppingCart size={20} />
-                    <span>Cart (0)</span>
-                  </button>
-                  <button className="flex-1 bg-primary text-white px-4 py-2 rounded-full font-medium flex items-center justify-center gap-2 hover:bg-accent transition-all">
-                    <HiOutlineUser size={20} />
-                    <span>Login</span>
-                  </button>
+                    <span>Cart ({cartCount})</span>
+                  </Link>
+                  {isAuthenticated ? (
+                    <button
+                      onClick={handleLogout}
+                      className="flex-1 bg-red-500 text-white px-4 py-2 rounded-full font-medium flex items-center justify-center gap-2 hover:bg-red-600 transition-all"
+                    >
+                      <HiLogout size={20} />
+                      <span>Logout</span>
+                    </button>
+                  ) : (
+                    <Link
+                      href="/login"
+                      className="flex-1 bg-primary text-white px-4 py-2 rounded-full font-medium flex items-center justify-center gap-2 hover:bg-accent transition-all"
+                    >
+                      <HiOutlineUser size={20} />
+                      <span>Login</span>
+                    </Link>
+                  )}
                 </div>
               </div>
             </motion.div>
