@@ -1,5 +1,7 @@
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/Component/Shared/Navbar";
+import Footer from "@/Component/Shared/Footer";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
@@ -16,8 +18,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${ubuntu.variable} antialiased`}>
-        
+        <Navbar />
         {children}
+        <Footer />
         </body>
     </html>
   );
