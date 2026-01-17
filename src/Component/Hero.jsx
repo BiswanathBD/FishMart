@@ -46,7 +46,7 @@ const Hero = () => {
       />
 
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-16 md:py-20 lg:py-0 min-h-[calc(100vh-80px)] md:min-h-[90vh] relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-12 md:py-16 lg:py-0 min-h-[calc(100vh-80px)] relative max-w-7xl mx-auto">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -78,7 +78,7 @@ const Hero = () => {
               <br />
               Your K
               <span className="relative inline-block -mt-2 pr-8 lg:pr-12">
-                itchen   
+                itchen
                 <motion.span
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
@@ -102,7 +102,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8"
+              className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8"
             >
               <motion.button
                 whileHover={{
@@ -110,14 +110,14 @@ const Hero = () => {
                   boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all text-sm md:text-base"
+                className="bg-white text-primary px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:opacity-90 transition-all text-sm md:text-base w-fit"
               >
                 Shop Now
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:bg-white/10 transition-all text-sm md:text-base"
+                className="bg-transparent border-2 border-white text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:bg-white/10 transition-all text-sm md:text-base w-fit"
               >
                 Learn More
               </motion.button>
@@ -158,12 +158,12 @@ const Hero = () => {
           </motion.div>
 
           {/* Right Image - Positioned outside right */}
-          <div className="relative w-full h-[400px] md:h-[500px] lg:h-full order-1 md:order-2">
+          <div className="relative w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-full order-1 md:order-2 flex items-center justify-center md:block">
             <motion.div
               initial={{ opacity: 0, scale: 0.8, rotate: -30 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
-              className="absolute top-1/2 left-1/2 md:left-auto md:-top-10 md:-right-20 lg:-right-40 xl:-right-60 transform -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:translate-y-0"
+              className="relative md:absolute md:-top-10 md:-right-20 lg:-right-32 xl:-right-40 2xl:-right-20"
             >
               {/* Outer rotating ring - clockwise */}
               <motion.div
@@ -197,15 +197,16 @@ const Hero = () => {
                 }}
                 className="relative"
               >
-                <div className="bg-secondary p-4 md:p-6 lg:p-8 rounded-full shadow-2xl border md:border-2 border-white/80">
-                  <Image
-                    className="rounded-full w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] xl:w-[600px] xl:h-[600px] object-cover"
-                    src="/hero.png"
-                    alt="Fresh Fish"
-                    width={600}
-                    height={600}
-                    priority
-                  />
+                <div className="bg-secondary p-3 sm:p-4 md:p-6 lg:p-8 rounded-full border md:border-2 border-white/80">
+                  <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] xl:w-[550px] xl:h-[550px] 2xl:w-[500px] 2xl:h-[500px]">
+                    <Image
+                      className="rounded-full object-cover"
+                      src="/hero.png"
+                      alt="Fresh Fish"
+                      fill
+                      priority
+                    />
+                  </div>
                 </div>
               </motion.div>
 
