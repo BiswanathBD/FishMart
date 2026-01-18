@@ -62,7 +62,7 @@ const CartPage = () => {
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
-              className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
+              className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-linear-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
             >
               <HiCheckCircle size={24} />
               <span>Order placed successfully! Thank you for shopping.</span>
@@ -105,7 +105,7 @@ const CartPage = () => {
               Add some fresh fish to get started!
             </p>
             <Link
-              href="/"
+              href="/shop"
               className="inline-block bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-accent transition-all"
             >
               Start Shopping
@@ -229,13 +229,13 @@ const CartPage = () => {
 
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-gradient-to-r from-primary to-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all mb-3"
+                  className="w-full bg-linear-to-r from-primary to-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all mb-3"
                 >
                   Proceed to Checkout
                 </button>
 
                 <Link
-                  href="/"
+                  href="/shop"
                   className="block text-center text-primary hover:text-accent font-medium transition-colors"
                 >
                   Continue Shopping

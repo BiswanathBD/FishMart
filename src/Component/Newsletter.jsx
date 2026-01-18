@@ -18,7 +18,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-r from-primary to-accent">
+    <section className="py-20 md:py-28 bg-linear-to-r from-primary to-accent">
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (
@@ -26,7 +26,7 @@ const Newsletter = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-linear-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
           >
             <HiCheckCircle size={24} />
             <span>Successfully subscribed to newsletter!</span>

@@ -60,7 +60,7 @@ const ProductDetailsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-8">
       <Container>
         {/* Back Button */}
         <button
@@ -86,7 +86,7 @@ const ProductDetailsPage = () => {
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               {product.popular && (
-                <div className="absolute top-6 right-6 bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold px-4 py-2 rounded-full flex items-center gap-2">
+                <div className="absolute top-6 right-6 bg-linear-to-r from-primary to-accent text-white text-sm font-semibold px-4 py-2 rounded-full flex items-center gap-2">
                   <HiStar size={16} />
                   Popular
                 </div>
@@ -130,7 +130,7 @@ const ProductDetailsPage = () => {
           <div className="flex flex-col">
             <div className="bg-white rounded-3xl p-6 lg:p-8 flex-1 flex flex-col">
               {/* Category Badge */}
-              <span className="inline-block bg-gradient-to-r from-primary/10 to-accent/10 text-primary text-sm font-bold px-4 py-2 rounded-full mb-4 w-fit border border-primary/20">
+              <span className="inline-block bg-linear-to-r from-primary/10 to-accent/10 text-primary text-sm font-bold px-4 py-2 rounded-full mb-4 w-fit border border-primary/20">
                 {product.category}
               </span>
 
@@ -146,10 +146,10 @@ const ProductDetailsPage = () => {
 
               {/* Price */}
               {product.price && (
-                <div className="mb-6 bg-gradient-to-r from-primary/5 to-accent/5 p-4 rounded-2xl border border-primary/10">
+                <div className="mb-6 bg-linear-to-r from-primary/5 to-accent/5 p-4 rounded-2xl border border-primary/10">
                   <p className="text-sm text-gray-600 mb-1">Price</p>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <span className="text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
                       ৳{product.price}
                     </span>
                     <span className="text-gray-500 text-lg">
@@ -169,7 +169,7 @@ const ProductDetailsPage = () => {
                     {product.benefits.map((benefit, index) => (
                       <span
                         key={index}
-                        className="bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 text-xs font-semibold px-4 py-2 rounded-full border border-green-200 flex items-center gap-1.5"
+                        className="bg-linear-to-r from-green-50 to-emerald-50 text-green-700 text-xs font-semibold px-4 py-2 rounded-full border border-green-200 flex items-center gap-1.5"
                       >
                         <HiCheckCircle size={14} />
                         {benefit}
@@ -187,7 +187,7 @@ const ProductDetailsPage = () => {
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 hover:from-primary hover:to-accent hover:text-white rounded-full flex items-center justify-center transition-all"
+                    className="w-12 h-12 bg-linear-to-br from-gray-100 to-gray-200 hover:from-primary hover:to-accent hover:text-white rounded-full flex items-center justify-center transition-all"
                   >
                     <HiMinus size={20} />
                   </button>
@@ -196,7 +196,7 @@ const ProductDetailsPage = () => {
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 hover:from-primary hover:to-accent hover:text-white rounded-full flex items-center justify-center transition-all"
+                    className="w-12 h-12 bg-linear-to-br from-gray-100 to-gray-200 hover:from-primary hover:to-accent hover:text-white rounded-full flex items-center justify-center transition-all"
                   >
                     <HiPlus size={20} />
                   </button>
@@ -206,7 +206,7 @@ const ProductDetailsPage = () => {
               {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-full font-bold hover:opacity-90 transition-all flex items-center justify-center gap-3 text-lg hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full bg-linear-to-r from-primary to-accent text-white py-4 rounded-full font-bold hover:opacity-90 transition-all flex items-center justify-center gap-3 text-lg hover:scale-[1.02] active:scale-[0.98]"
               >
                 <HiShoppingCart size={24} />
                 <span>Add to Cart - ৳{product.price * quantity}</span>
@@ -223,7 +223,7 @@ const ProductDetailsPage = () => {
               onClick={() => setActiveTab("nutrition")}
               className={`px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all ${
                 activeTab === "nutrition"
-                  ? "bg-gradient-to-r from-primary to-accent text-white"
+                  ? "bg-linear-to-r from-primary to-accent text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -233,7 +233,7 @@ const ProductDetailsPage = () => {
               onClick={() => setActiveTab("cooking")}
               className={`px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all ${
                 activeTab === "cooking"
-                  ? "bg-gradient-to-r from-primary to-accent text-white"
+                  ? "bg-linear-to-r from-primary to-accent text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -243,7 +243,7 @@ const ProductDetailsPage = () => {
               onClick={() => setActiveTab("storage")}
               className={`px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all ${
                 activeTab === "storage"
-                  ? "bg-gradient-to-r from-primary to-accent text-white"
+                  ? "bg-linear-to-r from-primary to-accent text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >

@@ -37,14 +37,16 @@ const LoginPage = () => {
     if (email === "babu@gmail.com" && password === "Babu@995") {
       document.cookie = "auth=true; path=/";
       showToast("success", "Successfully Logged In");
-      setTimeout(() => router.push("/shop"), 1000);
+      setTimeout(() => {
+        window.location.href = "/shop";
+      }, 1000);
     } else {
       showToast("error", "Invalid email or password");
     }
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center py-6 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-[calc(100vh-64px)] flex items-center py-6 bg-linear-to-br from-gray-50 to-gray-100">
       {/* Custom Toast */}
       <AnimatePresence>
         {toast.show && (
@@ -57,8 +59,8 @@ const LoginPage = () => {
             <div
               className={`flex items-center gap-3 px-6 py-4 rounded-full font-semibold text-white ${
                 toast.type === "success"
-                  ? "bg-gradient-to-r from-green-500 to-emerald-500"
-                  : "bg-gradient-to-r from-red-500 to-rose-500"
+                  ? "bg-linear-to-r from-green-500 to-emerald-500"
+                  : "bg-linear-to-r from-red-500 to-rose-500"
               }`}
             >
               {toast.type === "success" ? (
@@ -75,7 +77,7 @@ const LoginPage = () => {
       <Container>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Side - Hero Section */}
-          <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary to-accent relative overflow-hidden rounded-2xl">
+          <div className="hidden lg:flex lg:w-1/2 bg-linear-to-br from-primary via-primary to-accent relative overflow-hidden rounded-2xl">
             {/* Animated background elements */}
             <motion.div
               animate={{
@@ -275,14 +277,14 @@ const LoginPage = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="w-full bg-gradient-to-r from-primary to-accent text-white py-2.5 rounded-xl font-semibold hover:opacity-90 transition-all text-sm mt-6"
+                    className="w-full bg-linear-to-r from-primary to-accent text-white py-2.5 rounded-xl font-semibold hover:opacity-90 transition-all text-sm mt-6"
                   >
                     Login
                   </motion.button>
                 </form>
 
                 {/* Demo Credentials */}
-                <div className="mt-6 p-3 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/20">
+                <div className="mt-6 p-3 bg-linear-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/20">
                   <p className="text-xs text-gray-700 font-semibold mb-1.5">
                     Demo Credentials:
                   </p>

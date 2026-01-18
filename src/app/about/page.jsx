@@ -69,9 +69,9 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary to-accent text-white py-16 md:py-24">
+      <div className="bg-linear-to-r from-primary to-accent text-white py-16 md:py-24">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +102,7 @@ const AboutPage = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+                <div className="text-3xl md:text-5xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
                   {stat.number}
                 </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
@@ -191,9 +191,9 @@ const AboutPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl hover:from-primary/5 hover:to-accent/5 transition-all"
+                className="bg-linear-to-br from-gray-50 to-white p-6 rounded-2xl hover:from-primary/5 hover:to-accent/5 transition-all"
               >
-                <div className="w-14 h-14 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mb-4">
+                <div className="w-14 h-14 bg-linear-to-r from-primary to-accent rounded-full flex items-center justify-center mb-4">
                   <feature.icon className="text-white text-2xl" />
                 </div>
                 <h3 className="text-lg font-bold text-black mb-2">
@@ -236,7 +236,7 @@ const AboutPage = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="bg-white p-8 rounded-3xl text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-linear-to-r from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
                   <value.icon className="text-white text-3xl" />
                 </div>
                 <h3 className="text-xl font-bold text-black mb-3">
@@ -252,7 +252,7 @@ const AboutPage = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-16 md:py-24 bg-gradient-to-r from-primary to-accent">
+      <div className="py-16 md:py-24 bg-linear-to-r from-primary to-accent">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

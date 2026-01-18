@@ -72,9 +72,9 @@ const WhyChooseUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl hover:from-primary/5 hover:to-accent/5 transition-all border border-gray-100"
+              className="bg-linear-to-br from-gray-50 to-white p-6 rounded-2xl hover:from-primary/5 hover:to-accent/5 transition-all border border-gray-100"
             >
-              <div className="w-14 h-14 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mb-4">
+              <div className="w-14 h-14 bg-linear-to-r from-primary to-accent rounded-full flex items-center justify-center mb-4">
                 <benefit.icon className="text-white text-2xl" />
               </div>
               <h3 className="text-lg font-bold text-black mb-2">

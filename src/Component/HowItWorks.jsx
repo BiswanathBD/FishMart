@@ -38,7 +38,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="py-16 md:py-24 bg-linear-to-br from-gray-50 to-gray-100">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,12 +68,12 @@ const HowItWorks = () => {
             >
               <div className="bg-white p-6 rounded-2xl text-center h-full">
                 {/* Step Number */}
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-linear-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-bold text-lg">
                   {step.step}
                 </div>
 
                 {/* Icon */}
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 mt-6">
+                <div className="w-16 h-16 bg-linear-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 mt-6">
                   <step.icon className="text-primary text-3xl" />
                 </div>
 
@@ -88,7 +88,7 @@ const HowItWorks = () => {
 
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-primary to-accent" />
+                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-linear-to-r from-primary to-accent" />
               )}
             </motion.div>
           ))}

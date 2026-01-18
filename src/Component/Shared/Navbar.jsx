@@ -64,8 +64,8 @@ const Navbar = () => {
     // Remove auth cookie
     document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     setIsAuthenticated(false);
-    // Redirect to home
-    router.push("/");
+    // Force reload and redirect to home
+    window.location.href = "/";
   };
 
   const navLinks = [

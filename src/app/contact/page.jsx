@@ -54,7 +54,7 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (
@@ -62,7 +62,7 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-linear-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
           >
             <HiCheckCircle size={24} />
             <span>Message sent successfully! We'll get back to you soon.</span>
@@ -71,7 +71,7 @@ const ContactPage = () => {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary to-accent text-white py-16 md:py-24">
+      <div className="bg-linear-to-r from-primary to-accent text-white py-16 md:py-24">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +102,7 @@ const ContactPage = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="bg-white p-6 rounded-2xl text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-linear-to-r from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
                   <info.icon className="text-white text-2xl" />
                 </div>
                 <h3 className="text-lg font-bold text-black mb-2">
@@ -220,7 +220,7 @@ const ContactPage = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-full font-bold hover:opacity-90 transition-all"
+                  className="w-full bg-linear-to-r from-primary to-accent text-white py-4 rounded-full font-bold hover:opacity-90 transition-all"
                 >
                   Send Message
                 </button>
@@ -264,7 +264,7 @@ const ContactPage = () => {
                     href="https://github.com/BiswanathBD"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full flex items-center justify-center transition-all text-white"
+                    className="w-12 h-12 bg-linear-to-r from-primary to-accent hover:opacity-90 rounded-full flex items-center justify-center transition-all text-white"
                   >
                     <FaGithub size={24} />
                   </a>
@@ -272,7 +272,7 @@ const ContactPage = () => {
                     href="https://www.linkedin.com/in/biswanath-sarker-bd/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full flex items-center justify-center transition-all text-white"
+                    className="w-12 h-12 bg-linear-to-r from-primary to-accent hover:opacity-90 rounded-full flex items-center justify-center transition-all text-white"
                   >
                     <FaLinkedin size={24} />
                   </a>

@@ -3,10 +3,11 @@ import React from "react";
 import Container from "./Shared/Container";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="bg-primary flex items-center relative overflow-hidden min-h-screen">
+    <section className="bg-primary flex items-center relative overflow-hidden min-h-[calc(100vh-64px)]">
       {/* Background Image with low opacity */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -46,7 +47,7 @@ const Hero = () => {
       />
 
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-12 md:py-16 lg:py-0 min-h-[calc(100vh-80px)] relative max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-12 md:py-16 lg:py-0 min-h-[calc(100vh-80px)] relative">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -104,23 +105,27 @@ const Hero = () => {
               transition={{ delay: 0.7, duration: 0.6 }}
               className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8"
             >
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:opacity-90 transition-all text-sm md:text-base w-fit"
-              >
-                Shop Now
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:bg-white/10 transition-all text-sm md:text-base w-fit"
-              >
-                Learn More
-              </motion.button>
+              <Link href="/shop">
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-primary px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:opacity-90 transition-all text-sm md:text-base w-fit"
+                >
+                  Shop Now
+                </motion.button>
+              </Link>
+              <Link href="/about">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-transparent border-2 border-white text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold hover:bg-white/10 transition-all text-sm md:text-base w-fit"
+                >
+                  Learn More
+                </motion.button>
+              </Link>
             </motion.div>
 
             {/* Stats */}
@@ -163,7 +168,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.8, rotate: -30 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
-              className="relative md:absolute md:-top-10 md:-right-20 lg:-right-32 xl:-right-40 2xl:-right-20"
+              className="relative md:absolute md:top-4 md:-right-20 lg:-right-40 xl:-right-60"
             >
               {/* Outer rotating ring - clockwise */}
               <motion.div
@@ -198,7 +203,7 @@ const Hero = () => {
                 className="relative"
               >
                 <div className="bg-secondary p-3 sm:p-4 md:p-6 lg:p-8 rounded-full border md:border-2 border-white/80">
-                  <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] xl:w-[550px] xl:h-[550px] 2xl:w-[500px] 2xl:h-[500px]">
+                  <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] xl:w-[550px] xl:h-[550px] 2xl:w-[600px] 2xl:h-[600px]">
                     <Image
                       className="rounded-full object-cover"
                       src="/hero.png"

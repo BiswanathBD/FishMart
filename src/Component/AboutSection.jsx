@@ -57,7 +57,7 @@ const AboutSection = () => {
 
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition-all group"
+              className="inline-flex items-center gap-2 bg-linear-to-r from-primary to-accent text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition-all group"
             >
               Learn More About Us
               <HiArrowRight

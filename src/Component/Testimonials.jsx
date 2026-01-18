@@ -67,11 +67,11 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-100"
+              className="bg-linear-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-100"
             >
               {/* Avatar */}
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">
+                <div className="w-12 h-12 bg-linear-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">
                   {testimonial.avatar}
                 </div>
                 <div>
