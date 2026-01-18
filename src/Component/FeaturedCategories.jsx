@@ -22,11 +22,11 @@ const FeaturedCategories = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="pt-8 md:pt-12 lg:pt-16 bg-white">
       <Container>
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block bg-primary/10 text-primary font-semibold text-sm md:text-base px-4 py-2 rounded-full mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <span className="inline-block bg-primary/10 text-primary font-semibold text-sm md:text-base px-4 py-2 rounded-full mb-2">
             Fresh From Our Sellers
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-2">
@@ -128,7 +128,7 @@ const FeaturedCategories = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center mt-12 md:mt-16">
+        <div className="text-center mt-8 md:mt-12">
           <button className="bg-primary text-white px-8 py-3 md:px-10 md:py-4 rounded-full font-semibold hover:bg-accent transition-all inline-flex items-center gap-2 text-sm md:text-base">
             View All Fish
             <HiArrowRight className="text-lg" />

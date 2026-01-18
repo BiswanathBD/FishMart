@@ -18,7 +18,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-12 md:py-16 bg-gradient-to-r from-primary to-accent">
+    <section className="py-8 md:py-12 lg:py-14 bg-gradient-to-r from-primary to-accent">
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (

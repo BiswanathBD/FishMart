@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const AboutSection = () => {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-8 md:py-12 lg:py-16 bg-white">
       <Container>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Image */}
