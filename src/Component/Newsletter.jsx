@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiMail, HiCheckCircle } from "react-icons/hi";
+import { HiCheckCircle } from "react-icons/hi";
 import Container from "./Shared/Container";
 
 const Newsletter = () => {
@@ -18,7 +18,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-linear-to-r from-primary to-accent">
+    <section className="py-12 md:py-16 bg-gradient-to-r from-primary to-accent">
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (
@@ -26,10 +26,10 @@ const Newsletter = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-linear-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
           >
             <HiCheckCircle size={24} />
-            <span>Successfully subscribed to newsletter!</span>
+            <span>Successfully subscribed!</span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -40,42 +40,33 @@ const Newsletter = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center text-white"
+          className="text-center text-white max-w-2xl mx-auto"
         >
-          <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <HiMail className="text-white text-4xl" />
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Subscribe to Our Newsletter
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">
+            Subscribe to Newsletter
           </h2>
-          <p className="text-xl text-white/95 mb-10 max-w-2xl mx-auto">
-            Get the latest updates on fresh fish arrivals, special offers, and
-            exclusive recipes delivered to your inbox.
+          <p className="text-sm md:text-base text-white/90 mb-6">
+            Get updates on fresh arrivals and offers
           </p>
 
-          <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4">
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <div className="flex gap-2">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-full outline-none text-black text-lg"
+                placeholder="Your email"
+                className="flex-1 px-4 py-2.5 rounded-full outline-none text-black bg-white text-sm"
                 required
               />
               <button
                 type="submit"
-                className="bg-white text-primary px-10 py-4 rounded-full font-bold hover:bg-gray-100 transition-all text-lg whitespace-nowrap"
+                className="bg-white text-primary px-6 py-2.5 rounded-full font-semibold hover:bg-gray-100 transition-all text-sm"
               >
                 Subscribe
               </button>
             </div>
           </form>
-
-          <p className="text-white/80 text-base mt-6">
-            We respect your privacy. Unsubscribe at any time.
-          </p>
         </motion.div>
       </Container>
     </section>
