@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Logo from "./Logo";
+import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 import {
   HiOutlineShoppingCart,
@@ -20,6 +21,30 @@ const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [showLogoutToast, setShowLogoutToast] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allProducts, setAllProducts] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const searchRef = React.useRef(null);
+
+  // Fetch products on mount
+  useEffect(() => {
+    fetch("/categories.json")
+      .then((res) => res.json())
+      .then((data) => setAllProducts(data))
+      .catch((err) => console.error("Error fetching products:", err));
+  }, []);
+
+  // Close search results when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearchResults(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Check auth status on mount
   useEffect(() => {
@@ -61,6 +86,22 @@ const Navbar = () => {
     };
   }, []);
 
+  // Handle search - using useMemo to avoid setState in effect
+  const searchResults = React.useMemo(() => {
+    if (searchQuery.trim() === "") {
+      return [];
+    }
+    return allProducts.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+  }, [searchQuery, allProducts]);
+
+  const handleSearchResultClick = (productId) => {
+    setSearchQuery("");
+    setShowSearchResults(false);
+    router.push(`/shop/${productId}`);
+  };
+
   const handleLogout = () => {
     // Remove auth cookie
     document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
@@ -88,7 +129,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-linear-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
           >
             <HiLogout size={24} />
             <span>Successfully logged out!</span>
@@ -130,6 +171,7 @@ const Navbar = () => {
 
             {/* Search Bar */}
             <motion.div
+              ref={searchRef}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -138,11 +180,75 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search fish..."
-                className="w-64 pr-4 pl-10 py-2 bg-white rounded-full outline-none border-2 border-transparent focus:border-primary transition-all"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  if (e.target.value.trim()) setShowSearchResults(true);
+                }}
+                onFocus={() => {
+                  if (searchQuery.trim()) setShowSearchResults(true);
+                }}
+                className="w-64 pr-4 pl-10 py-1.5 bg-white rounded-full outline-none border-2 border-transparent focus:border-primary transition-all"
               />
               <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary">
-                <CiSearch size={24} />
+                <CiSearch size={20} />
               </div>
+
+              {/* Desktop Search Results */}
+              <AnimatePresence>
+                {showSearchResults &&
+                  searchQuery.trim() &&
+                  searchResults.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-full mt-2 left-0 w-80 bg-white rounded-2xl border border-gray-200 max-h-96 overflow-y-auto z-50"
+                    >
+                      {searchResults.slice(0, 5).map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => handleSearchResultClick(product.id)}
+                          className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                        >
+                          <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 shrink-0">
+                            <Image
+                              src={product.image}
+                              alt={product.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="flex-1 text-left">
+                            <p className="font-semibold text-black text-sm">
+                              {product.name}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {product.category}
+                            </p>
+                          </div>
+                          {product.price && (
+                            <span className="text-primary font-semibold text-sm">
+                              ৳{product.price}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                {showSearchResults &&
+                  searchQuery &&
+                  searchResults.length === 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-full mt-2 left-0 w-80 bg-white rounded-2xl border border-gray-200 p-4 text-center text-gray-500 z-50"
+                    >
+                      No results found
+                    </motion.div>
+                  )}
+              </AnimatePresence>
             </motion.div>
 
             {/* Action Buttons */}
@@ -219,6 +325,14 @@ const Navbar = () => {
                   <input
                     type="text"
                     placeholder="Search fish..."
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      if (e.target.value.trim()) setShowSearchResults(true);
+                    }}
+                    onFocus={() => {
+                      if (searchQuery.trim()) setShowSearchResults(true);
+                    }}
                     className="w-full pr-4 pl-10 py-2 bg-white rounded-full outline-none border-2 border-transparent focus:border-primary transition-all"
                   />
                   <CiSearch
@@ -226,6 +340,53 @@ const Navbar = () => {
                     className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary"
                   />
                 </div>
+
+                {/* Mobile Search Results */}
+                {showSearchResults &&
+                  searchQuery.trim() &&
+                  searchResults.length > 0 && (
+                    <div className="bg-white rounded-2xl border border-gray-200 max-h-64 overflow-y-auto">
+                      {searchResults.slice(0, 5).map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => {
+                            handleSearchResultClick(product.id);
+                            setIsMenuOpen(false);
+                          }}
+                          className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                        >
+                          <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 shrink-0">
+                            <Image
+                              src={product.image}
+                              alt={product.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="flex-1 text-left">
+                            <p className="font-semibold text-black text-sm">
+                              {product.name}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {product.category}
+                            </p>
+                          </div>
+                          {product.price && (
+                            <span className="text-primary font-semibold text-sm">
+                              ৳{product.price}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                {showSearchResults &&
+                  searchQuery &&
+                  searchResults.length === 0 && (
+                    <div className="bg-white rounded-2xl border border-gray-200 p-4 text-center text-gray-500">
+                      No results found
+                    </div>
+                  )}
 
                 {/* Mobile Links */}
                 <ul className="space-y-2">
