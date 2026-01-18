@@ -19,6 +19,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [showLogoutToast, setShowLogoutToast] = useState(false);
 
   // Check auth status on mount
   useEffect(() => {
@@ -64,8 +65,11 @@ const Navbar = () => {
     // Remove auth cookie
     document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     setIsAuthenticated(false);
-    // Force reload and redirect to home
-    window.location.href = "/";
+    setShowLogoutToast(true);
+    // Force reload and redirect to home after showing toast
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
   };
 
   const navLinks = [
@@ -76,7 +80,22 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-secondary/95 py-2 sticky top-0 z-50 shadow-sm">
+    <nav className="bg-secondary/95 py-2 sticky top-0 z-50">
+      {/* Logout Toast */}
+      <AnimatePresence>
+        {showLogoutToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold"
+          >
+            <HiLogout size={24} />
+            <span>Successfully logged out!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Container>
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -141,7 +160,7 @@ const Navbar = () => {
                   size={24}
                   className="text-black group-hover:text-primary transition-colors"
                 />
-                {cartCount > 0 && (
+                {isAuthenticated && cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
                     {cartCount}
                   </span>
@@ -230,7 +249,12 @@ const Navbar = () => {
                     className="flex-1 bg-white text-primary px-4 py-2 rounded-full font-medium flex items-center justify-center gap-2 border-2 border-primary hover:bg-primary hover:text-white transition-all"
                   >
                     <HiOutlineShoppingCart size={20} />
-                    <span>Cart ({cartCount})</span>
+                    <span>
+                      Cart
+                      {isAuthenticated && cartCount > 0
+                        ? ` (${cartCount})`
+                        : ""}
+                    </span>
                   </Link>
                   {isAuthenticated ? (
                     <button
