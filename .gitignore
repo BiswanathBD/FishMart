@@ -41,7 +41,6 @@ next-env.d.ts
 config.bat
 
 # Security & Editor ignore
-.vscode/
-api.js
-api.ts
+!api.js
+!api.ts
 **/public/fonts/
